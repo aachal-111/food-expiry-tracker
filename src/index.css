@@ -1,0 +1,14 @@
+
+:root {
+  font-family: Arial, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+#root {
+  width: 100%;
+}

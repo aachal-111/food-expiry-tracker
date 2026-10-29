@@ -1,0 +1,160 @@
+
+* { box-sizing: border-box; }
+
+body {
+  background: #171717;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.phone {
+  width: 340px;
+  max-width: 100%;
+  min-height: 650px;
+  background: #101010;
+  border: 2px solid #aaa;
+  border-radius: 35px;
+  margin: 25px auto;
+  padding: 12px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #151b15;
+  padding: 14px 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.menu {
+  background: none;
+  color: white;
+  border: none;
+}
+
+section { padding: 12px 5px; }
+
+h3 {
+  font-size: 16px;
+  border: 1px solid #555;
+  padding: 12px;
+}
+
+.welcome {
+  border: 1px solid #222;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.welcome p {
+  color: #aaa;
+  margin: 3px 0;
+  font-size: 13px;
+}
+
+input, select {
+  display: block;
+  width: 100%;
+  background: #111;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 9px 0;
+}
+
+label { font-size: 12px; font-weight: bold; }
+
+button { cursor: pointer; }
+
+.green {
+  width: 100%;
+  background: #2d914b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 13px;
+  margin: 12px 0;
+}
+
+.outline {
+  width: 100%;
+  background: transparent;
+  color: white;
+  border: 1px solid #aaa;
+  padding: 12px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat {
+  min-height: 100px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.stat b { font-size: 23px; }
+.stat span { font-size: 14px; }
+
+.green-card { background: #172513; border: 1px solid #34572c; }
+.yellow-card { background: #302300; border: 1px solid #725300; }
+.red-card { background: #361d25; border: 1px solid #824453; }
+
+.between, .recent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.between button {
+  color: white;
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.recent {
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.recent small {
+  display: block;
+  color: #aaa;
+}
+
+.status {
+  color: #b9e4a9;
+  font-size: 12px;
+}
+
+.food-card {
+  border: 1px solid #3b642d;
+  border-radius: 15px;
+  padding: 14px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.food-card p { margin: 5px 0; }
+
+.food-card button {
+  background: #642b35;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+}
