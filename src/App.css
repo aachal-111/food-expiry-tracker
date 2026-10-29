@@ -1,120 +1,233 @@
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background: #101010;
+}
 
 body {
-  background: #171717;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #101010;
   color: white;
   font-family: Arial, sans-serif;
 }
 
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
 .phone {
-  width: 340px;
-  max-width: 100%;
-  min-height: 650px;
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  min-height: 100dvh;
   background: #101010;
-  border: 2px solid #aaa;
-  border-radius: 35px;
-  margin: 25px auto;
-  padding: 12px;
+  margin: 0 auto;
+  padding: 12px 14px 30px;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #151b15;
-  padding: 14px 10px;
-  font-size: 13px;
+  gap: 10px;
+  background: #151f17;
+  padding: 18px 12px;
+  border-radius: 8px;
+  font-size: 16px;
   font-weight: bold;
 }
 
+header span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .menu {
+  flex-shrink: 0;
   background: none;
   color: white;
   border: none;
+  font-size: 14px;
 }
 
-section { padding: 12px 5px; }
+section {
+  padding: 16px 2px;
+}
 
 h3 {
-  font-size: 16px;
+  font-size: 18px;
   border: 1px solid #555;
-  padding: 12px;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 12px 0 20px;
 }
 
 .welcome {
-  border: 1px solid #222;
-  padding: 12px;
-  margin: 12px 0;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0 18px;
+}
+
+.welcome strong {
+  font-size: 19px;
 }
 
 .welcome p {
   color: #aaa;
-  margin: 3px 0;
-  font-size: 13px;
+  margin: 6px 0 0;
+  font-size: 14px;
 }
 
-input, select {
+form {
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+input,
+select {
   display: block;
   width: 100%;
-  background: #111;
+  min-width: 0;
+  min-height: 48px;
+  background: #141414;
   color: white;
-  border: 1px solid #444;
-  border-radius: 8px;
+  border: 1px solid #555;
+  border-radius: 10px;
   padding: 12px;
-  margin: 9px 0;
+  margin: 9px 0 14px;
+  font-family: inherit;
+  font-size: 16px;
 }
 
-label { font-size: 12px; font-weight: bold; }
+input:focus,
+select:focus {
+  outline: 2px solid #2d914b;
+  outline-offset: 1px;
+}
 
-button { cursor: pointer; }
+input::placeholder {
+  color: #aaa;
+}
+
+input[type="date"] {
+  color-scheme: dark;
+  appearance: auto;
+  -webkit-appearance: auto;
+  min-width: 0;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  touch-action: manipulation;
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
 
 .green {
+  display: block;
   width: 100%;
+  min-height: 48px;
   background: #2d914b;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 9px;
   padding: 13px;
-  margin: 12px 0;
+  margin: 16px 0;
+  font-weight: bold;
 }
 
 .outline {
   width: 100%;
+  min-height: 48px;
   background: transparent;
   color: white;
   border: 1px solid #aaa;
+  border-radius: 8px;
   padding: 12px;
 }
 
 .stats {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .stat {
-  min-height: 100px;
+  min-width: 0;
+  min-height: 115px;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10px;
+  padding: 12px;
 }
 
-.stat b { font-size: 23px; }
-.stat span { font-size: 14px; }
+.stat b {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
 
-.green-card { background: #172513; border: 1px solid #34572c; }
-.yellow-card { background: #302300; border: 1px solid #725300; }
-.red-card { background: #361d25; border: 1px solid #824453; }
+.stat span {
+  font-size: 14px;
+  line-height: 1.4;
+}
 
-.between, .recent {
+.green-card {
+  background: #172513;
+  border: 1px solid #34572c;
+}
+
+.yellow-card {
+  background: #302300;
+  border: 1px solid #725300;
+}
+
+.red-card {
+  background: #361d25;
+  border: 1px solid #824453;
+}
+
+.between,
+.recent {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+}
+
+.between > select {
+  width: 50%;
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 13px;
+  padding: 10px 7px;
 }
 
 .between button {
@@ -125,47 +238,94 @@ button { cursor: pointer; }
 }
 
 .recent {
-  padding: 10px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  margin-top: 5px;
+  padding: 14px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.recent span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .recent small {
   display: block;
   color: #aaa;
+  margin-top: 5px;
 }
 
 .status {
   color: #b9e4a9;
   font-size: 12px;
+  text-align: right;
 }
 
 .food-card {
   border: 1px solid #3b642d;
   border-radius: 15px;
-  padding: 14px;
-  margin: 12px 0;
-  font-size: 13px;
+  padding: 16px;
+  margin: 15px 0;
+  font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
-.food-card p { margin: 5px 0; }
+.food-card strong {
+  font-size: 17px;
+}
+
+.food-card p {
+  margin: 9px 0;
+  line-height: 1.4;
+}
 
 .food-card button {
   background: #642b35;
   color: white;
   border: none;
-  padding: 7px 14px;
-  border-radius: 5px;
+  padding: 10px 16px;
+  border-radius: 7px;
+  margin-top: 8px;
+  margin-right: 5px;
 }
-@media (max-width: 600px) {
+
+@media (min-width: 700px) {
   .phone {
+    margin: 25px auto;
+    min-height: 650px;
+    border: 2px solid #aaa;
+    border-radius: 30px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 699px) {
+  .phone {
+    max-width: none;
     width: 100%;
-    max-width: 100%;
     min-height: 100dvh;
     margin: 0;
     border: none;
     border-radius: 0;
-    padding: 12px;
+    padding: 12px 14px calc(24px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 360px) {
+  header {
+    font-size: 14px;
+    padding: 14px 9px;
+  }
+
+  .stat {
+    min-height: 100px;
+  }
+
+  .stat span {
+    font-size: 12px;
+  }
+
+  .between > select {
+    font-size: 12px;
   }
 }
