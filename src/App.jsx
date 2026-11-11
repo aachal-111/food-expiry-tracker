@@ -513,7 +513,7 @@ function App() {
       {session && page === "dashboard" && (
         <section>
           <div className="welcome">
-            <strong>Hello, Aachal!</strong>
+          <strong>Hello, {session?.user?.email?.split("@")[0] || "User"}!</strong>
             <p>Here is your food summary.</p>
           </div>
 
