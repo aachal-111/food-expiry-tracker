@@ -169,3 +169,122 @@ button { cursor: pointer; }
     padding: 12px;
   }
 }
+
+/* Add Food back arrow */
+.add-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.add-heading h3 {
+  margin: 0;
+}
+
+.back-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* Mobile input improvements */
+input,
+select,
+textarea {
+  font-size: 16px !important;
+}
+
+input[type="date"] {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 46px;
+  color-scheme: dark;
+}
+/* Fix Add Food Item back arrow */
+.back-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  touch-action: manipulation;
+}
+/* Three-line navigation menu */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.menu-toggle {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.app-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  margin-top: 8px;
+  background: #172019;
+  border: 1px solid #344238;
+  border-radius: 10px;
+}
+
+.app-nav button {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.app-nav button:hover,
+.app-nav button:focus-visible {
+  background: #284631;
+}
+/* Prevent automatic input zoom on iPhone */
+input,
+select,
+textarea {
+  font-size: 16px !important;
+}
+
+/* Keep form fields responsive on all devices */
+input,
+select,
+textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+}
