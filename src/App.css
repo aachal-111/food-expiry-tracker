@@ -359,3 +359,33 @@ input[type="date"] {
   background: transparent !important;
   box-shadow: none !important;
 }
+/* Colour the entire food item row */
+
+.recent.fresh,
+.food-card.fresh {
+  background-color: #216e42;
+  color: white;
+}
+
+.recent.expiring-soon,
+.food-card.expiring-soon {
+  background-color: #b86b16;
+  color: white;
+}
+
+.recent.expired,
+.food-card.expired {
+  background-color: #a52d35;
+  color: white;
+}
+
+/* Keep all text readable */
+
+.recent.fresh *,
+.recent.expiring-soon *,
+.recent.expired *,
+.food-card.fresh *,
+.food-card.expiring-soon *,
+.food-card.expired * {
+  color: white;
+}

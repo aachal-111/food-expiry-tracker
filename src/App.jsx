@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 import "./App.css";
@@ -24,6 +23,7 @@ function getStatus(date) {
   if (!date) return "Unknown";
 
   const today = new Date();
+
   const current = new Date(
     today.getFullYear(),
     today.getMonth(),
@@ -35,6 +35,7 @@ function getStatus(date) {
 
   if (days < 0) return "Expired";
   if (days <= 3) return "Expiring Soon";
+
   return "Fresh";
 }
 
@@ -52,7 +53,7 @@ function App() {
   const [message, setMessage] = useState("");
 
   const [foods, setFoods] = useState([]);
-  const [food, setFood] = useState(emptyFood);
+  const [food, setFood] = useState({ ...emptyFood });
   const [editingId, setEditingId] = useState(null);
 
   const [search, setSearch] = useState("");
@@ -66,16 +67,21 @@ function App() {
     supabase.auth.getSession().then(({ data, error }) => {
       if (!active) return;
 
-      if (error) setMessage(error.message);
+      if (error) {
+        setMessage(error.message);
+      }
+
       setSession(data?.session ?? null);
       setLoading(false);
     });
 
     const { data: listener } =
-      supabase.auth.onAuthStateChange((_event, newSession) => {
-        setSession(newSession);
-        setLoading(false);
-      });
+      supabase.auth.onAuthStateChange(
+        (_event, newSession) => {
+          setSession(newSession);
+          setLoading(false);
+        }
+      );
 
     return () => {
       active = false;
@@ -206,7 +212,9 @@ function App() {
             .update(payload)
             .eq("id", editingId)
             .eq("user_id", session.user.id)
-        : supabase.from("food_items").insert(payload);
+        : supabase
+            .from("food_items")
+            .insert(payload);
 
       const { error } = await query;
 
@@ -257,6 +265,7 @@ function App() {
 
     setEditingId(item.id);
     setMessage("");
+    setMenuOpen(false);
     setPage("add");
   }
 
@@ -265,12 +274,14 @@ function App() {
     setFood({ ...emptyFood });
     setEditingId(null);
     setMessage("");
+    setMenuOpen(false);
     setPage("add");
   }
 
   // Return to dashboard
   function goBack() {
     setMessage("");
+    setMenuOpen(false);
     setPage("dashboard");
   }
 
@@ -282,13 +293,15 @@ function App() {
       try {
         input.showPicker();
       } catch {
-        // The browser can use its normal date picker.
+        // Use the browser's normal date picker.
       }
     }
   }
 
   // Logout
   async function logout() {
+    setMenuOpen(false);
+
     const { error } = await supabase.auth.signOut();
 
     if (error) {
@@ -326,72 +339,90 @@ function App() {
 
   return (
     <div className="phone">
-     <header className="app-header">
-  <span>🌿 Food Expiry Tracker</span>
 
-  <button
-    type="button"
-    className="menu-toggle"
-    aria-label={menuOpen ? "Close menu" : "Open menu"}
-    aria-expanded={menuOpen}
-    onClick={() => setMenuOpen(!menuOpen)}
-  >
-    ☰
-  </button>
-</header>
+      {/* HEADER */}
+      <header className="app-header">
+        <span>🌿 Food Expiry Tracker</span>
 
-{menuOpen && (
-  <nav className="app-nav">
-    {session ? (
-      <>
-        <button type="button" onClick={() => {
-          setPage("dashboard");
-          setMenuOpen(false);
-        }}>
-          Dashboard
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-label={
+            menuOpen ? "Close menu" : "Open menu"
+          }
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
         </button>
+      </header>
 
-        <button type="button" onClick={() => {
-          setPage("list");
-          setMenuOpen(false);
-        }}>
-          Food Items
-        </button>
+      {/* HAMBURGER MENU */}
+      {menuOpen && (
+        <nav className="app-nav">
+          {session ? (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  setPage("dashboard");
+                  setMenuOpen(false);
+                }}
+              >
+                Dashboard
+              </button>
 
-        <button type="button" onClick={() => {
-          openAdd();
-          setMenuOpen(false);
-        }}>
-          Add Food
-        </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setPage("list");
+                  setMenuOpen(false);
+                }}
+              >
+                Food Items
+              </button>
 
-        <button type="button" onClick={() => {
-          setMenuOpen(false);
-          logout();
-        }}>
-          Logout
-        </button>
-      </>
-    ) : (
-      <>
-        <button type="button" onClick={() => {
-          setRegister(false);
-          setMenuOpen(false);
-        }}>
-          Login
-        </button>
+              <button
+                type="button"
+                onClick={openAdd}
+              >
+                Add Food
+              </button>
 
-        <button type="button" onClick={() => {
-          setRegister(true);
-          setMenuOpen(false);
-        }}>
-          Register
-        </button>
-      </>
-    )}
-  </nav>
-)}
+              <button
+                type="button"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  setRegister(false);
+                  setMenuOpen(false);
+                }}
+              >
+                Login
+              </button>
 
+              <button
+                type="button"
+                onClick={() => {
+                  setRegister(true);
+                  setMenuOpen(false);
+                }}
+              >
+                Register
+              </button>
+            </>
+          )}
+        </nav>
+      )}
+
+      {/* ERROR OR SUCCESS MESSAGE */}
       {message && (
         <p
           role="alert"
@@ -411,7 +442,9 @@ function App() {
 
           <div className="welcome">
             <strong>
-              {register ? "Create Account" : "Welcome Back"}
+              {register
+                ? "Create Account"
+                : "Welcome Back"}
             </strong>
 
             <p>
@@ -428,7 +461,9 @@ function App() {
               autoComplete="email"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
             />
 
             <input
@@ -442,10 +477,15 @@ function App() {
               minLength={6}
               required
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
             />
 
-            <button className="green" disabled={busy}>
+            <button
+              className="green"
+              disabled={busy}
+            >
               {busy
                 ? "Please wait..."
                 : register
@@ -519,11 +559,18 @@ function App() {
           </div>
 
           {foods.length === 0 && (
-            <p>No food items yet. Add your first food!</p>
+            <p>
+              No food items yet. Add your first food!
+            </p>
           )}
 
-          {foods.slice(0, 3).map((f) => (
-            <div className="recent" key={f.id}>
+         {foods.slice(0, 3).map((f) => (
+  <div
+    className={`recent ${getStatus(f.expiry_date)
+      .toLowerCase()
+      .replaceAll(" ", "-")}`}
+    key={f.id}
+  >
               <span>
                 {f.name}
                 <small>{f.category}</small>
@@ -555,7 +602,6 @@ function App() {
                 ? "Edit Food Item"
                 : "Add Food Item"}
             </h3>
-            
           </div>
 
           <form onSubmit={saveFood}>
@@ -685,7 +731,18 @@ function App() {
       {/* FOOD ITEMS LIST */}
       {session && page === "list" && (
         <section>
-          <h3>Food Items</h3>
+          <div className="add-heading">
+  <button
+    type="button"
+    className="back-arrow"
+    aria-label="Back to dashboard"
+    onClick={goBack}
+  >
+    ←
+  </button>
+
+  <h3>Food Items</h3>
+</div>
 
           <input
             type="search"
@@ -749,14 +806,18 @@ function App() {
           </button>
 
           {filteredFoods.length === 0 && (
-            <p>No matching food items found.</p>
+            <p>
+              No matching food items found.
+            </p>
           )}
 
           {filteredFoods.map((f) => (
             <div
-              className="food-card"
-              key={f.id}
-            >
+  className={`food-card ${getStatus(f.expiry_date)
+    .toLowerCase()
+    .replaceAll(" ", "-")}`}
+  key={f.id}
+>
               <strong>
                 {f.name} — {getStatus(f.expiry_date)}
               </strong>
@@ -793,8 +854,6 @@ function App() {
       )}
     </div>
   );
-  
-} 
-
+}
 
 export default App;
