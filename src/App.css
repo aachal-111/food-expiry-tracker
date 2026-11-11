@@ -288,3 +288,74 @@ textarea {
   box-sizing: border-box;
   max-width: 100%;
 }
+/* Improve Add Food Item heading */
+.add-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.add-heading h3 {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 22px;
+  font-weight: 600;
+  box-shadow: none !important;
+}
+
+.back-arrow {
+  border: none !important;
+  background: transparent !important;
+  color: white;
+  font-size: 28px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Improve date input appearance */
+input[type="date"] {
+  min-height: 50px;
+  font-size: 16px !important;
+  color-scheme: dark;
+  border-radius: 8px;
+}
+.add-heading h3 {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* Remove box around Add Food Item heading */
+.add-heading h3,
+.add-heading button.back-arrow {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.add-heading h3 {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* Remove rectangular box around Add Food Item */
+.add-heading > h3 {
+  all: unset;
+  display: block;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Keep back arrow clean */
+.add-heading > .back-arrow {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
